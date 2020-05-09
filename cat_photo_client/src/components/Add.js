@@ -26,10 +26,11 @@ class Add extends Component {
     })
       .then(res => res.json())
       .then(resJson => {
-        this.setState({
-            name:'',
-            img:'',
-        });
+        this.props.handleAddCat(resJson)
+        // this.setState({
+        //     name:'',
+        //     img:'',
+        // });
       })
       .catch(error => console.error({ Error: error }));
   };

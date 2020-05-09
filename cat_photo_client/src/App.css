@@ -19,6 +19,7 @@ button {
   border-color: #5170D7;
   font-family: 'Catamaran', sans-serif;
   font-weight: 800;
+  padding: 1%;
 }
 
 .nice {
@@ -32,6 +33,9 @@ button {
 form {
   border-radius: 15px;
   margin: 15px;
-  font-family: 'Catamaran', sans-serif;
-  
+  font-family: 'Catamaran', sans-serif; 
+}
+
+.catbox{
+  padding-bottom: 10%;
 }

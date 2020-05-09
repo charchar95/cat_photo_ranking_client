@@ -19,7 +19,9 @@ class App extends React.Component {
     const copyCat = [...this.state.cats]
     copyCat.unshift(newCat);
     this.setState({
-      cats: copyCat
+      cats: copyCat,
+      addVisible: false, 
+      seeAllCats: true
     })
     }
 
@@ -54,6 +56,9 @@ class App extends React.Component {
   })
    .then(updatedCat => {
      this.getCats()
+     this.setState({
+      editVisible: false,  
+     })
    })
    .catch(error => console.log(error))
   }
@@ -147,17 +152,17 @@ class App extends React.Component {
       {this.state.addVisible ? 
       <Add 
       cat={this.state.cat} 
-      handleSubmit={this.handleAddCat}
+      handleAddCat={this.handleAddCat}
        />
         : null}
 
     {this.state.seeAllCats ? 
          <div>
-           <h1>see the cats</h1>
+           <h2>Say Hello to the Cats!</h2>
          {this.state.cats.map(cat => {
              return (
              <div className="index" key={cat.id}>
-               <div className="column">
+               <div className="catbox">
                  <h3>{ cat.name }</h3>
                  <img src={cat.img} width="35%" height="35%"/> 
               </div>
