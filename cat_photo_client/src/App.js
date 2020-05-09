@@ -1,5 +1,5 @@
 import React from 'react'
-import Cats from './components/Cats'
+import Form from './components/Form'
 
 class App extends React.Component {
   state = {
@@ -9,26 +9,6 @@ class App extends React.Component {
     formVisible: false
   }
   
-  handleAdd = (event, formInputs) => {
-    event.preventDefault()
-    fetch('http://localhost:3000/cats', {
-      body: JSON.stringify(formInputs),
-      method: 'POST', 
-      headers: {
-        "Accept": "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      }
-    })
-    .then(createdCat => createdCat.json())
-    .then(jsonedCat=> {
-      //add cat to cats
-      this.setState({
-        cats: [jsonedCat, ...this.state.cats]
-      })
-    })
-    .catch((error) => console.log(error));
-  }
-
 
   handleDelete = (deletedCat) => {
     fetch(`/cats/${deletedCat.id}`, {
@@ -41,13 +21,15 @@ class App extends React.Component {
     .then(json => {
       const cats = this.state.cats.filter((cat) => cat.id !== deletedCat.id)
       this.setState({cats})
+      console.log('Deleted cat')
+      this.shuffleCat()
     })
     .catch(error => console.log(error))
   }
 
   handleUpdate = (event, formInputs) => {
     event.preventDefault()
-    console.log('in it to win it')
+    console.log('Handle Update')
     fetch(`http://localhost:3000/cats/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
@@ -105,12 +87,16 @@ class App extends React.Component {
          <img src={this.state.cat.img} width="35%" height="35%"/> 
          <button onClick={()=> this.shuffleCat()}>NICE</button>
          <button onClick={()=> this.shuffleCat()}>Nah</button>
+         <button onClick={this.toggleForm}>Edit this Cat</button>
          <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
       </>
         : null}
 
       {this.state.formVisible ? 
-      <Form cat={cat} handleSubmit={this.handleUpdate} />
+      <Form 
+      cat={this.state.cat} 
+      handleSubmit={this.handleUpdate}
+       />
 
         : null}
 
