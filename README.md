@@ -1,1 +1,0 @@
-# cat_photo_ranking_client
