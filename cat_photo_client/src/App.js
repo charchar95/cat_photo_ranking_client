@@ -1,6 +1,8 @@
 import React from 'react'
+import './App.css';
 import Form from './components/Form'
 import Add from './components/Add'
+
 
 class App extends React.Component {
   state = {
@@ -8,7 +10,8 @@ class App extends React.Component {
     cat: [],
     firstCat: true,
     editVisible: false,
-    addVisible: false
+    addVisible: false, 
+    seeAllCats: false
   }
   
   handleAddCat = (newCat) => {
@@ -56,11 +59,29 @@ class App extends React.Component {
   }
 
   toggleEditForm = () => {
-    this.setState({editVisible: !this.state.editVisible})
+    this.setState({
+      editVisible: !this.state.editVisible,
+      addVisible: false
+    })
+
   }
 
   toggleAddForm = () => {
-    this.setState({addVisible: !this.state.addVisible})
+    this.setState({
+      addVisible: !this.state.addVisible,
+      editVisible: false, 
+      firstCat: true,
+      seeAllCats: false,
+    })
+  }
+
+  toggleSeeCats = () => {
+    this.setState({
+      seeAllCats: !this.state.seeAllCats,
+      editVisible: false,
+      addVisible: false,
+      firstCat: true,
+    })
   }
 
   componentDidMount(){
@@ -79,7 +100,10 @@ class App extends React.Component {
     let oneCat = this.state.cats[random]
     this.setState({ 
       cat: oneCat,
-      firstCat: false
+      firstCat: false,
+      editVisible: false,
+      addVisible: false,
+      seeAllCats: false
     })
     // console.log("shuffle cat" + this.state.cat)
   }
@@ -88,12 +112,14 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="header">
-           CATS!
+          <h1>CATS!</h1> 
         <button onClick={this.toggleAddForm}>Add a new cat</button>
+        <button onClick={this.toggleSeeCats}>See All Cats</button>
+        <hr></hr>
         </div> 
         {this.state.firstCat ? 
         <>
-        <button onClick={()=> this.shuffleCat()}>I would love to see a cat today</button>
+        <button onClick={()=> this.shuffleCat()}>Show me a cat</button>
        </>
       : null}
 
@@ -101,10 +127,12 @@ class App extends React.Component {
       <>
         <h3>{ this.state.cat.name }</h3>
          <img src={this.state.cat.img} width="35%" height="35%"/> 
-         <button onClick={()=> this.shuffleCat()}>NICE</button>
-         <button onClick={()=> this.shuffleCat()}>Nah</button>
-         <button onClick={this.toggleEditForm}>Edit this Cat</button>
-         <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
+         <div className="catbuttons">
+          <button className="nice" onClick={()=> this.shuffleCat()}>NICE</button>
+          <button className="nah" onClick={()=> this.shuffleCat()}>Nah</button>
+          <button onClick={this.toggleEditForm}>Edit this Cat</button>
+          <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
+         </div>
       </>
         : null}
 
@@ -121,6 +149,22 @@ class App extends React.Component {
       cat={this.state.cat} 
       handleSubmit={this.handleAddCat}
        />
+        : null}
+
+    {this.state.seeAllCats ? 
+         <div>
+           <h1>see the cats</h1>
+         {this.state.cats.map(cat => {
+             return (
+             <div className="index" key={cat.id}>
+               <div className="column">
+                 <h3>{ cat.name }</h3>
+                 <img src={cat.img} width="35%" height="35%"/> 
+              </div>
+             </div>
+         )
+         })}
+     </div>
         : null}
 
      </div>  

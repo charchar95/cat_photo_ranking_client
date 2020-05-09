@@ -1,38 +1,37 @@
+@import url('<link href="https://fonts.googleapis.com/css2?family=Catamaran&display=swap" rel="stylesheet">');
+
 .App {
   text-align: center;
+  font-family: 'Catamaran', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #D6FFFE;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+hr {
+  border: 2px solid #5170D7;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+button {
+  margin: 15px;
+  border-radius: 10px;
+  border-color: #5170D7;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 800;
 }
 
-.App-link {
-  color: #61dafb;
+.nice {
+  background-color: #2CB64C;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nah {
+  background-color: #B71C04;
+}
+
+form {
+  border-radius: 15px;
+  margin: 15px;
+  font-family: 'Catamaran', sans-serif;
+  
 }
