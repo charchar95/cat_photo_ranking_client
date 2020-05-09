@@ -14,7 +14,7 @@ class Form extends Component {
     this.setState({[event.target.id] : event.target.value})
   }
   handleSubmit (event){
-    // event.preventDefault()
+    event.preventDefault()
     const cat = {
       name: this.state.name,
       img: this.state.img,

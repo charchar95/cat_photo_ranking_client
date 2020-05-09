@@ -1,14 +1,25 @@
 import React from 'react'
 import Form from './components/Form'
+import Add from './components/Add'
 
 class App extends React.Component {
   state = {
     cats: [],
     cat: [],
     firstCat: true,
-    formVisible: false
+    editVisible: false,
+    addVisible: false
   }
   
+  handleAddCat = (newCat) => {
+    console.log("Handle Add User - New Cat", newCat);
+    const copyCat = [...this.state.cats]
+    copyCat.unshift(newCat);
+    this.setState({
+      cats: copyCat
+    })
+    }
+
 
   handleDelete = (deletedCat) => {
     fetch(`/cats/${deletedCat.id}`, {
@@ -44,8 +55,12 @@ class App extends React.Component {
    .catch(error => console.log(error))
   }
 
-  toggleForm = () => {
-    this.setState({formVisible: !this.state.formVisible})
+  toggleEditForm = () => {
+    this.setState({editVisible: !this.state.editVisible})
+  }
+
+  toggleAddForm = () => {
+    this.setState({addVisible: !this.state.addVisible})
   }
 
   componentDidMount(){
@@ -74,6 +89,7 @@ class App extends React.Component {
       <div className="App">
         <div className="header">
            CATS!
+        <button onClick={this.toggleAddForm}>Add a new cat</button>
         </div> 
         {this.state.firstCat ? 
         <>
@@ -87,17 +103,24 @@ class App extends React.Component {
          <img src={this.state.cat.img} width="35%" height="35%"/> 
          <button onClick={()=> this.shuffleCat()}>NICE</button>
          <button onClick={()=> this.shuffleCat()}>Nah</button>
-         <button onClick={this.toggleForm}>Edit this Cat</button>
+         <button onClick={this.toggleEditForm}>Edit this Cat</button>
          <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
       </>
         : null}
 
-      {this.state.formVisible ? 
+      {this.state.editVisible ? 
       <Form 
       cat={this.state.cat} 
       handleSubmit={this.handleUpdate}
        />
+        : null}
 
+
+      {this.state.addVisible ? 
+      <Add 
+      cat={this.state.cat} 
+      handleSubmit={this.handleAddCat}
+       />
         : null}
 
      </div>  
