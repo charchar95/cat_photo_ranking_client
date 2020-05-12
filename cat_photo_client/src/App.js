@@ -4,6 +4,7 @@ import Form from './components/Form'
 import Add from './components/Add'
 
 
+
 class App extends React.Component {
   state = {
     cats: [],
@@ -46,7 +47,7 @@ class App extends React.Component {
   handleUpdate = (event, formInputs) => {
     event.preventDefault()
     console.log('Handle Update')
-    fetch(BASEURL `/cats/${formInputs.id}`, {
+    fetch(`https://cat-photo-ranking-api.herokuapp.com/cats/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
    headers: {
@@ -94,7 +95,7 @@ class App extends React.Component {
   }
 
   getCats () {
-    fetch(process.env.PORT + '/cats')
+    fetch('cat-photo-ranking-api.herokuapp.com/cats')
     .then(response => response.json())
     .then(json => this.setState({ cats: json }))
     .catch(error => console.error(error))
