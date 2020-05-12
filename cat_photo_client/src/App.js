@@ -129,14 +129,15 @@ class App extends React.Component {
       : null}
 
       {!this.state.firstCat ? 
-      <>
+      <>  
+        <button className="nice" onClick={()=> this.shuffleCat()}>NICE</button>
+        <button className="nah" onClick={()=> this.shuffleCat()}>Nah</button>
+        <button onClick={this.toggleEditForm}>Edit this Cat</button>
+        <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
         <h3>{ this.state.cat.name }</h3>
          <img src={this.state.cat.img} width="35%" height="35%"/> 
          <div className="catbuttons">
-          <button className="nice" onClick={()=> this.shuffleCat()}>NICE</button>
-          <button className="nah" onClick={()=> this.shuffleCat()}>Nah</button>
-          <button onClick={this.toggleEditForm}>Edit this Cat</button>
-          <button onClick={()=> this.handleDelete(this.state.cat)}>X</button>
+        
          </div>
       </>
         : null}
