@@ -3,8 +3,6 @@ import './App.css';
 import Form from './components/Form'
 import Add from './components/Add'
 
-
-
 class App extends React.Component {
   state = {
     cats: [],
