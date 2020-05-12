@@ -46,7 +46,7 @@ class App extends React.Component {
   handleUpdate = (event, formInputs) => {
     event.preventDefault()
     console.log('Handle Update')
-    fetch(`http://localhost:3000/cats/${formInputs.id}`, {
+    fetch(BASEURL `/cats/${formInputs.id}`, {
       body: JSON.stringify(formInputs),
       method: 'PUT',
    headers: {
@@ -94,7 +94,7 @@ class App extends React.Component {
   }
 
   getCats () {
-    fetch('http://localhost:3000/cats')
+    fetch(process.env.PORT + '/cats')
     .then(response => response.json())
     .then(json => this.setState({ cats: json }))
     .catch(error => console.error(error))
