@@ -14,7 +14,7 @@ class Add extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch("/cats", {
+    fetch("https://cat-photo-ranking-api.herokuapp.com/cats", {
       method: "POST",
       body: JSON.stringify({ 
         name: this.state.name,
