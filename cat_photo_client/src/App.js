@@ -24,7 +24,6 @@ class App extends React.Component {
     })
     }
 
-
   handleDelete = (deletedCat) => {
     fetch(`https://cat-photo-ranking-api.herokuapp.com/cats/${deletedCat.id}`, {
       method: 'DELETE', 
