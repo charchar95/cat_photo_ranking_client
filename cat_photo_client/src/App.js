@@ -93,7 +93,7 @@ class App extends React.Component {
   }
 
   getCats () {
-    fetch('cat-photo-ranking-api.herokuapp.com/cats')
+    fetch('https://cat-photo-ranking-api.herokuapp.com/cats')
     .then(response => response.json())
     .then(json => this.setState({ cats: json }))
     .catch(error => console.error(error))
